@@ -19,6 +19,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
 
     @CreationTimestamp
@@ -29,7 +30,6 @@ public class Role {
     @Column(name = "updated_date", nullable = false)
     private LocalDateTime updatedDate;
 
-    @OneToMany(mappedBy="role")
-    private Set<User> users;
-
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Users> users;
 }

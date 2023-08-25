@@ -1,10 +1,17 @@
 package org.example.enums;
 
-/**
- * @author longnguyen on 17/08/2023
- * @project IntelliJ IDEA
- */
-public enum Gender {
 
-    MALE, FEMALE
+public enum Gender {
+    MALE(true),
+    FEMALE(false);
+
+    private final Boolean value;
+
+    Gender(Boolean value) {
+        this.value = value;
+    }
+
+    public Boolean getValue() {
+        return value;
+    }
 }

@@ -82,8 +82,8 @@ public class Application implements ActionListener, MouseListener, KeyListener {
         mnFIile.add(mntmExit);
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-//
-//        tabbedPane.addTab("Bán xe", new GUI_QLBanXe());
+
+        tabbedPane.addTab("Quản lý khách hàng", new KhachHang());
 //        tabbedPane.addTab("Bảo hành", new GUI_QLBaoHanh());
 //        tabbedPane.addTab("Nhập xe", new GUI_QLNhapXe());
 //        tabbedPane.addTab("QL xe", new GUI_QLXe());

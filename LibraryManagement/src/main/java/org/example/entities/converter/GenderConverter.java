@@ -10,29 +10,15 @@ import javax.persistence.Converter;
  * @project IntelliJ IDEA
  */
 @Converter
-public class GenderConverter implements AttributeConverter<Gender, Integer> {
+public class GenderConverter implements AttributeConverter<Gender, Boolean> {
 
     @Override
-    public Integer convertToDatabaseColumn(Gender attribute) {
-        switch (attribute){
-            case MALE:
-                return 1;
-            case FEMALE:
-                return 0;
-            default:
-                return null;
-        }
+    public Boolean convertToDatabaseColumn(Gender attribute) {
+        return attribute.getValue();
     }
 
     @Override
-    public Gender convertToEntityAttribute(Integer dbData) {
-        switch (dbData){
-            case 0:
-                return Gender.FEMALE;
-            case 1:
-                return Gender.MALE;
-            default:
-                return null;
-        }
+    public Gender convertToEntityAttribute(Boolean dbData) {
+        return dbData ? Gender.MALE : Gender.FEMALE;
     }
 }
