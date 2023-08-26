@@ -46,4 +46,32 @@ public class Customer {
     @OneToMany(mappedBy="customer")
     private Set<Invoice> invoices;
 
+    public Customer(Integer id, String fullName, String email, String phone, String address, String gender,  LocalDateTime updatedDate) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.updatedDate = updatedDate;
+    }
+
+    public Customer(Integer id, String fullName, String email, String phone, String address, String gender) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+    }
+
+    public Customer(String fullName, String email, String phone, String address, String gender, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
 }

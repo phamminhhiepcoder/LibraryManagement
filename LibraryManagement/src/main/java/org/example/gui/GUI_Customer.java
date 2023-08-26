@@ -1,8 +1,9 @@
 package org.example.gui;
 
-import org.example.dao.BookDao;
-import org.example.dao.impl.BookDaoImpl;
+import org.example.dao.CustomerDao;
+import org.example.dao.impl.CustomerDaoImpl;
 import org.example.entities.Book;
+import org.example.entities.Customer;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,243 +21,166 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 	private JTable table;
 	private DefaultTableModel tableModel;
 	private JTextField txtId;
-    private JTextField txtISBN;
+    private JTextField txtEmail;
 	private JTextField txtName;
-	private JTextField txtAuthorName;
-	private JTextField txtLanguage;
-    private JTextField txtQuantity;
-    private JTextField txtPrice;
-    private JTextField txtCategory;
+	private JTextField txtPhone;
+	private JTextField txtAddress;
+    private JTextField txtGender;
 	private JButton btnAdd;
 	private JButton btnDelete;
 	private JButton btnUpdate;
 	private JButton btnReload;
 	private JButton btnFilter;
-    private final BookDao bookDao;
+    private final CustomerDao customerDao;
 	private JLabel lblError;
 
 	/**
 	 * Create the panel.
 	 */
 	public GUI_Customer() {
-
-//		try {
-//			ConnectDB.getInstance().connect();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
-//		xeMay_DAO = new XeMay_DAO();
-//		loaiXe_DAO = new LoaiXe_DAO();
-//		nhaCC_DAO = new NhaCungCap_DAO();
-        bookDao = new BookDaoImpl();
+        customerDao = new CustomerDaoImpl();
 
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 
-		JPanel pThongTinSach = new JPanel();
-		pThongTinSach.setBackground(new Color(255, 255, 255));
-		pThongTinSach.setBounds(0, 0, 1180, 305);
-		add(pThongTinSach);
-		pThongTinSach.setLayout(null);
-		pThongTinSach.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.blue), "Thông tin xe máy"));
+		JPanel pThongTinKH = new JPanel();
+		pThongTinKH.setBackground(new Color(255, 255, 255));
+		pThongTinKH.setBounds(0, 0, 1180, 305);
+		add(pThongTinKH);
+		pThongTinKH.setLayout(null);
+		pThongTinKH.setBorder(
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.blue), "Thông tin khách hàng"));
 
-		JPanel pMaSach = new JPanel();
-		pMaSach.setBackground(new Color(255, 255, 255));
-		pMaSach.setBounds(20, 21, 383, 45);
-		pThongTinSach.add(pMaSach);
-		pMaSach.setLayout(null);
-		JLabel lblNewLabel = new JLabel("Mã sách: ");
+		JPanel pMaKH = new JPanel();
+		pMaKH.setBackground(new Color(255, 255, 255));
+		pMaKH.setBounds(20, 21, 383, 45);
+		pThongTinKH.add(pMaKH);
+		pMaKH.setLayout(null);
+		JLabel lblNewLabel = new JLabel("Mã khách hàng: ");
 		lblNewLabel.setBounds(0, 12, 80, 14);
-		pMaSach.add(lblNewLabel);
+		pMaKH.add(lblNewLabel);
 		txtId = new JTextField();
 		txtId.setBounds(106, 5, 260, 29);
-		pMaSach.add(txtId);
+		pMaKH.add(txtId);
 		txtId.setColumns(10);
 
-		JPanel pTenSach = new JPanel();
-		pTenSach.setBackground(new Color(255, 255, 255));
-		pTenSach.setLayout(null);
-		pTenSach.setBounds(20, 105, 383, 45);
-		pThongTinSach.add(pTenSach);
-		JLabel lblNewLabel_1 = new JLabel("Tên sách:");
+		JPanel pTenKH = new JPanel();
+		pTenKH.setBackground(new Color(255, 255, 255));
+		pTenKH.setLayout(null);
+		pTenKH.setBounds(20, 105, 383, 45);
+		pThongTinKH.add(pTenKH);
+		JLabel lblNewLabel_1 = new JLabel("Tên khách hàng:");
 		lblNewLabel_1.setBounds(0, 12, 82, 14);
-		pTenSach.add(lblNewLabel_1);
+		pTenKH.add(lblNewLabel_1);
 		txtName = new JTextField();
 		txtName.setColumns(10);
 		txtName.setBounds(106, 5, 260, 29);
-		pTenSach.add(txtName);
+		pTenKH.add(txtName);
 
-		JPanel pISBN = new JPanel();
-		pISBN.setBackground(new Color(255, 255, 255));
-		pISBN.setLayout(null);
-		pISBN.setBounds(20, 62, 383, 45);
-		pThongTinSach.add(pISBN);
-		JLabel lbISBN = new JLabel("ISBN:");
+		JPanel pEmail = new JPanel();
+		pEmail.setBackground(new Color(255, 255, 255));
+		pEmail.setLayout(null);
+		pEmail.setBounds(20, 62, 383, 45);
+		pThongTinKH.add(pEmail);
+		JLabel lbISBN = new JLabel("Email:");
 		lbISBN.setBounds(0, 12, 78, 14);
-		pISBN.add(lbISBN);
-		txtISBN = new JTextField();
-		txtISBN.setColumns(10);
-		txtISBN.setBounds(106, 5, 260, 29);
-		pISBN.add(txtISBN);
+		pEmail.add(lbISBN);
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(106, 5, 260, 29);
+		pEmail.add(txtEmail);
 
-		JPanel pNgonNgu = new JPanel();
-		pNgonNgu.setBackground(new Color(255, 255, 255));
-		pNgonNgu.setLayout(null);
-		pNgonNgu.setBounds(20, 194, 383, 45);
-		pThongTinSach.add(pNgonNgu);
-		JLabel lblNgonNgu = new JLabel("Ngôn ngữ:");
-		lblNgonNgu.setBounds(0, 12, 90, 14);
-		pNgonNgu.add(lblNgonNgu);
-		txtLanguage = new JTextField();
-		txtLanguage.setColumns(10);
-		txtLanguage.setBounds(106, 5, 260, 29);
-		pNgonNgu.add(txtLanguage);
+		JPanel pPhone = new JPanel();
+		pPhone.setBackground(new Color(255, 255, 255));
+		pPhone.setLayout(null);
+		pPhone.setBounds(20, 194, 383, 45);
+		pThongTinKH.add(pPhone);
+		JLabel lblPhone = new JLabel("Số điện thoại:");
+		lblPhone.setBounds(0, 12, 90, 14);
+		pPhone.add(lblPhone);
+		txtPhone = new JTextField();
+		txtPhone.setColumns(10);
+		txtPhone.setBounds(106, 5, 260, 29);
+		pPhone.add(txtPhone);
 
-		JPanel pTacGia = new JPanel();
-		pTacGia.setBackground(new Color(255, 255, 255));
-		pTacGia.setLayout(null);
-		pTacGia.setBounds(413, 21, 352, 45);
-		pThongTinSach.add(pTacGia);
-		JLabel lblTacGia = new JLabel("Tác giả:");
+		JPanel pAddress = new JPanel();
+		pAddress.setBackground(new Color(255, 255, 255));
+		pAddress.setLayout(null);
+		pAddress.setBounds(413, 21, 352, 45);
+		pThongTinKH.add(pAddress);
+		JLabel lblTacGia = new JLabel("Địa chỉ:");
 		lblTacGia.setBounds(0, 12, 80, 14);
-		pTacGia.add(lblTacGia);
-		txtAuthorName = new JTextField();
-		txtAuthorName.setColumns(10);
-		txtAuthorName.setBounds(84, 8, 268, 26);
-		pTacGia.add(txtAuthorName);
+		pAddress.add(lblTacGia);
+		txtAddress = new JTextField();
+		txtAddress.setColumns(10);
+		txtAddress.setBounds(84, 8, 268, 26);
+		pAddress.add(txtAddress);
 
-		JPanel pTheLoai = new JPanel();
-		pTheLoai.setBackground(new Color(255, 255, 255));
-		pTheLoai.setLayout(null);
-		pTheLoai.setBounds(413, 62, 352, 45);
-		pThongTinSach.add(pTheLoai);
-		JLabel lblTheLoai = new JLabel("Thể loại:");
-		lblTheLoai.setBounds(0, 12, 74, 14);
-		pTheLoai.add(lblTheLoai);
-		txtCategory = new JTextField();
-		txtCategory.setColumns(10);
-		txtCategory.setBounds(84, 8, 268, 26);
-		pTheLoai.add(txtCategory);
+		JPanel pGender = new JPanel();
+		pGender.setBackground(new Color(255, 255, 255));
+		pGender.setLayout(null);
+		pGender.setBounds(413, 62, 352, 45);
+		pThongTinKH.add(pGender);
+		JLabel lblGender = new JLabel("Giới tính:");
+		lblGender.setBounds(0, 12, 74, 14);
+		pGender.add(lblGender);
+		txtGender = new JTextField();
+		txtGender.setColumns(10);
+		txtGender.setBounds(84, 8, 268, 26);
+		pGender.add(txtGender);
 
-		JPanel pGia = new JPanel();
-		pGia.setBackground(new Color(255, 255, 255));
-		pGia.setLayout(null);
-		pGia.setBounds(413, 105, 352, 45);
-		pThongTinSach.add(pGia);
-		JLabel lblNewLabel_6 = new JLabel("Giá:");
-		lblNewLabel_6.setBounds(0, 12, 74, 14);
-		pGia.add(lblNewLabel_6);
-		txtPrice = new JTextField();
-		txtPrice.setColumns(10);
-		txtPrice.setBounds(84, 5, 268, 29);
-		pGia.add(txtPrice);
-
-		JPanel pNamSanXuat = new JPanel();
-		pNamSanXuat.setBackground(new Color(255, 255, 255));
-		pNamSanXuat.setLayout(null);
-		pNamSanXuat.setBounds(413, 149, 352, 45);
-		pThongTinSach.add(pNamSanXuat);
-		JLabel lblNewLabel_7 = new JLabel("Năm sản xuất:");
-		lblNewLabel_7.setBounds(0, 12, 84, 14);
-		pNamSanXuat.add(lblNewLabel_7);
-		txtISBN = new JTextField();
-		txtISBN.setColumns(10);
-		txtISBN.setBounds(84, 5, 268, 29);
-		pNamSanXuat.add(txtISBN);
-
-		Image imgThem = new ImageIcon("data//them.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnAdd = new JButton("Thêm");
-		btnAdd.setIcon(new ImageIcon(imgThem));
 		btnAdd.setBackground(new Color(75, 209, 254));
 		btnAdd.setForeground(new Color(128, 0, 0));
 		btnAdd.setBounds(20, 256, 98, 37);
-		pThongTinSach.add(btnAdd);
+		pThongTinKH.add(btnAdd);
 
 		btnDelete = new JButton("Xóa");
 		btnDelete.setIcon(new ImageIcon("data//xoa.png"));
 		btnDelete.setForeground(new Color(128, 0, 0));
 		btnDelete.setBackground(new Color(75, 209, 254));
 		btnDelete.setBounds(128, 256, 98, 37);
-		pThongTinSach.add(btnDelete);
+		pThongTinKH.add(btnDelete);
 
 		btnUpdate = new JButton("Sửa");
 		btnUpdate.setIcon(new ImageIcon("data//sua.png"));
 		btnUpdate.setForeground(new Color(128, 0, 0));
 		btnUpdate.setBackground(new Color(75, 209, 254));
 		btnUpdate.setBounds(236, 256, 98, 37);
-		pThongTinSach.add(btnUpdate);
+		pThongTinKH.add(btnUpdate);
 
 		btnReload = new JButton("Làm mới");
 		btnReload.setIcon(new ImageIcon("data//lamMoi.png"));
 		btnReload.setForeground(new Color(128, 0, 0));
 		btnReload.setBackground(new Color(75, 209, 254));
 		btnReload.setBounds(345, 256, 122, 37);
-		pThongTinSach.add(btnReload);
+		pThongTinKH.add(btnReload);
 
 		btnFilter = new JButton("Lọc");
 		btnFilter.setIcon(new ImageIcon("data//filter.png"));
 		btnFilter.setForeground(new Color(128, 0, 0));
 		btnFilter.setBackground(new Color(75, 209, 254));
 		btnFilter.setBounds(480, 256, 98, 37);
-		pThongTinSach.add(btnFilter);
+		pThongTinKH.add(btnFilter);
 
 		Box bTable = Box.createVerticalBox();
 		bTable.setBounds(0, 305, 1180, 294);
 		add(bTable);
 		bTable.add(Box.createRigidArea(new Dimension(0, 5)));
-		String head[] = { "Mã sách", "ISBN", "Tên sách", "Ngôn ngữ", "Thể loại", "Số lượng", "Giá sách"
-				};
+		String head[] = { "Mã khách hàng", "Tên khách hàng", "Email", "Số điện thoại", "Địa chỉ", "Giới tính"};
 		tableModel = new DefaultTableModel(head, 0);
 		table = new JTable(tableModel);
 		table.setBackground(new Color(255, 255, 255));
 		bTable.add(new JScrollPane(table));
 
-		List<Book> books = bookDao.getAll();
-		readBooksToTable(books);
-
-		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(255, 255, 255));
-		panel_2.setBounds(810, 21, 345, 246);
-		pThongTinSach.add(panel_2);
-
-		JPanel pNhaCC = new JPanel();
-		pNhaCC.setLayout(null);
-		pNhaCC.setBackground(Color.WHITE);
-		pNhaCC.setBounds(20, 149, 383, 45);
-		pThongTinSach.add(pNhaCC);
-
-		JLabel lblNewLabel_3_1 = new JLabel("Tên nhà cung cấp:");
-		lblNewLabel_3_1.setBounds(0, 12, 106, 14);
-		pNhaCC.add(lblNewLabel_3_1);
-
-		txtQuantity = new JTextField();
-		txtQuantity.setColumns(10);
-		txtQuantity.setBounds(106, 5, 260, 29);
-		pNhaCC.add(txtQuantity);
-
-		JPanel pCategory = new JPanel();
-		pCategory.setLayout(null);
-		pCategory.setBackground(Color.WHITE);
-		pCategory.setBounds(413, 194, 352, 45);
-		pThongTinSach.add(pCategory);
-
-		JLabel lblCategory = new JLabel("Thể loại:");
-		lblCategory.setBounds(0, 12, 90, 14);
-		pCategory.add(lblCategory);
-
-		txtCategory = new JTextField();
-		txtCategory.setColumns(10);
-		txtCategory.setBounds(85, 5, 267, 29);
-		pCategory.add(txtCategory);
+		List<Customer> customers =  customerDao.getAll();
+		readCustomersToTable(customers);
 
 		lblError = new JLabel("");
 		lblError.setFont(new Font("Tahoma", Font.ITALIC, 14));
 		lblError.setForeground(new Color(255, 0, 0));
 		lblError.setBounds(596, 253, 292, 38);
-		pThongTinSach.add(lblError);
-
+		pThongTinKH.add(lblError);
 
 		btnReload.addActionListener(this);
 		btnFilter.addActionListener(this);
@@ -266,34 +189,26 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		btnDelete.addActionListener(this);
 
 		table.addMouseListener(this);
-
 	}
 
-	public void createIconImage(JLabel x, int W, int H, String path) {
-		ImageIcon image = new ImageIcon(
-				new ImageIcon(path).getImage().getScaledInstance(W, H, Image.SCALE_SMOOTH));
-		x.setIcon(image);
-		repaint();
-		revalidate();
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		if (o.equals(btnAdd)) {
-			addBook();
+			addCustomer();
 		}
 		if (o.equals(btnDelete)) {
-			deleteBook();
+			deleteCustomer();
 		}
 		if (o.equals(btnUpdate)) {
-			updateBook();
+			updateCustomer();
 		}
 		if (o.equals(btnReload)) {
 			lamMoi();
 		}
 		if (o.equals(btnFilter)) {
-			filterBook();
+			filterCustomer();
 		}
 
 	}
@@ -314,13 +229,11 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		// TODO Auto-generated method stub
 		int row = table.getSelectedRow();
 		txtId.setText(tableModel.getValueAt(row, 0).toString());
-		txtLanguage.setText(tableModel.getValueAt(row, 1).toString());
-		txtName.setText(tableModel.getValueAt(row, 2).toString());
-		txtPrice.setText(tableModel.getValueAt(row, 5).toString());
-		txtQuantity.setText(tableModel.getValueAt(row, 6).toString());
-		txtAuthorName.setText(tableModel.getValueAt(row, 7).toString());
-		txtISBN.setText(tableModel.getValueAt(row, 8).toString());
-		txtCategory.setText(tableModel.getValueAt(row, 9).toString());
+		txtAddress.setText(tableModel.getValueAt(row, 4).toString());
+		txtName.setText(tableModel.getValueAt(row, 1).toString());
+		txtGender.setText(tableModel.getValueAt(row, 5).toString());
+		txtPhone.setText(tableModel.getValueAt(row, 3).toString());
+		txtEmail.setText(tableModel.getValueAt(row, 2).toString());
 	}
 
 	@Override
@@ -335,28 +248,24 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 
 	}
 
-	private void readBooksToTable(List<Book> books) {
-		DecimalFormat df = new DecimalFormat("0.##");
-		for (Book book : books) {
-			tableModel.addRow(new Object[] { book.getId(), book.getISBN(), book.getName(),
-					book.getAuthorName(), book.getLanguage(),  book.getCategory(),
-					book.getQuantity(), df.format(book.getPrice())});
+	private void readCustomersToTable(List<Customer> customers) {
+		for (Customer customer : customers) {
+			tableModel.addRow(new Object[] { customer.getId(), customer.getFullName(), customer.getEmail(),
+					customer.getPhone(), customer.getAddress(),  customer.getGender()});
 		}
 	}
 
 	private void lamMoi() {
-		txtPrice.setText("");
-		txtISBN.setText("");
-		txtQuantity.setText("");
-		txtAuthorName.setText("");
+		txtEmail.setText("");
+		txtGender.setText("");
+		txtPhone.setText("");
 		txtId.setText("");
-		txtLanguage.setText("");
+		txtAddress.setText("");
 		txtName.setText("");
-		txtCategory.setText("");
 		lblError.setText("");
-		List<Book> books = bookDao.getAll();
+		List<Customer> customers = customerDao.getAll();
 		xoaDuLieuTrongTable();
-		readBooksToTable(books);
+		readCustomersToTable(customers);
 	}
 
 	private void xoaDuLieuTrongTable() {
@@ -365,39 +274,35 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		dm.fireTableDataChanged();
 	}
 
-	private void addBook() {
-		String ISBN = txtISBN.getText();
-		if (!validateISBN(ISBN))
-			return;
+	private void addCustomer() {
 		if(!kiemTraRong())return ;
+		String email = txtEmail.getText();
+		String phone  = txtPhone.getText();
 		String name = txtName.getText();
-		String authorName = txtAuthorName.getText();
-		String language = txtLanguage.getText();
-		String category = txtCategory.getText();
-		Integer quantity = Integer.parseInt(txtQuantity.getText());
-		Float price = Float.parseFloat(txtPrice.getText());
+		String address = txtAddress.getText();
+		String gender = txtGender.getText();
 		LocalDateTime createdDate = LocalDateTime.now();
 		LocalDateTime updatedDate = LocalDateTime.now();
 
-		if (checkIfExistName(name) && checkIfExistISBN(ISBN) && validateISBN(ISBN)) {
-			Book book = new Book(ISBN, name, authorName, language, category, quantity, price, createdDate, updatedDate);
-			bookDao.save(book);
-			List<Book> books = bookDao.getAll();
+		if (checkIfExistEmail(email) && checkIfExistPhone(phone)) {
+			Customer customer = new Customer(name, email, phone, address, gender, createdDate, updatedDate);
+			customerDao.save(customer);
+			List<Customer> customers = customerDao.getAll();
 			xoaDuLieuTrongTable();
-			readBooksToTable(books);
+			readCustomersToTable(customers);
 		}
 	}
 
 	private boolean kiemTraChonHangTable(int row) {
 		if (row < 0) {
-			JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng dòng trên table");
+			JOptionPane.showMessageDialog(this, "Vui lòng chọn dòng trên table");
 			return false;
 		} else {
 			return true;
 		}
 	}
 
-	private void deleteBook() {
+	private void deleteCustomer() {
 		int row = table.getSelectedRow();
 		if (kiemTraChonHangTable(row)) {
 			int result = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa không?");
@@ -408,15 +313,15 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 				return;
 			} else {
 				Integer id = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
-				bookDao.delete(id);
+				customerDao.delete(id);
 				xoaDuLieuTrongTable();
-				List<Book> books = bookDao.getAll();
-				readBooksToTable(books);
+				List<Customer> customers = customerDao.getAll();
+				readCustomersToTable(customers);
 			}
 		}
 	}
 
-	private void updateBook() {
+	private void updateCustomer() {
 		int row = table.getSelectedRow();
 		if (kiemTraChonHangTable(row)) {
 			int result = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn sửa không?");
@@ -427,246 +332,227 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 				return;
 			} else {
 				Integer id = Integer.parseInt(txtId.getText());
-				String ISBN = txtISBN.getText();
 				String name = txtName.getText();
-				String authorName = txtAuthorName.getText();
-				String language = txtLanguage.getText();
-				String category = txtCategory.getText();
-				Integer quantity = Integer.parseInt(txtQuantity.getText());
-				Float price = Float.parseFloat(txtPrice.getText());
+				String phone = txtPhone.getText();
+				String address = txtAddress.getText();
+				String email = txtEmail.getText();
+				String gender = txtGender.getText();
+
 				LocalDateTime updatedDate = LocalDateTime.now();
-				Book book = new Book(id, ISBN, name, authorName, language, category, quantity, price, updatedDate);
-				bookDao.update(book);
-				List<Book> books = bookDao.getAll();
+				Customer customer = new Customer(id, name, email, phone, address, gender, updatedDate);
+				customerDao.update(customer);
+				List<Customer> customers = customerDao.getAll();
 				xoaDuLieuTrongTable();
-				readBooksToTable(books);
+				readCustomersToTable(customers);
 			}
 		}
 	}
 
-	private boolean checkIfExistName(String name) {
-		List<Book> books = bookDao.getAll();
-		for (Book book : books) {
-			if (name.trim().equals(book.getName())) {
+	private boolean checkIfExistEmail(String email) {
+		List<Customer> customers = customerDao.getAll();
+		for (Customer customer : customers) {
+			if (email.trim().equals(customer.getEmail())) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private boolean checkIfExistISBN(String ISBN) {
-		List<Book> books = bookDao.getAll();
-		for (Book book : books) {
-			if (ISBN.trim().equals(book.getISBN())) {
+	private boolean checkIfExistPhone(String phone) {
+		List<Customer> customers = customerDao.getAll();
+		for (Customer customer : customers) {
+			if (phone.trim().equals(customer.getPhone())) {
 				return false;
 			}
 		}
 		return true;
 	}
 
-	private boolean validateISBN(String ISBN) {
-		if (ISBN.equals("")) {
-			JOptionPane.showMessageDialog(this, "ISBN không được rỗng!");
-			txtISBN.selectAll();
-			txtISBN.requestFocus();
+	private boolean validateEmail(String email) {
+		if (email.equals("")) {
+			JOptionPane.showMessageDialog(this, "Email không được rỗng!");
+			txtEmail.selectAll();
+			txtEmail.requestFocus();
 			return false;
 		}
-		String regex = "(([0-9A-Z]){4,5}-([0-9A-Z]){6,12})";
-		if (!ISBN.matches(regex)) {
-			JOptionPane.showMessageDialog(this,
-					"Số khung có chiều dài từ 10-17 ký tự và có dạng XXXX-XXXXXX.. trong đó X là các kí tự số hoặc chữ hoa. Ví dụ: 082U-12H1268712");
-			txtISBN.selectAll();
-			txtISBN.requestFocus();
+		String regex = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
+		if (!email.matches(regex)) {
+			JOptionPane.showMessageDialog(this, "Email không hợp lệ. Ví dụ hợp lệ: xxx@gmail.com");
+			txtEmail.selectAll();
+			txtEmail.requestFocus();
 			return false;
 		} else {
 			return true;
 		}
 	}
 
-	private List<Book> getBookListFromTable() {
-		List<Book> books = new ArrayList<>();
+
+	private boolean validatePhone(String phone) {
+		if (phone.equals("")) {
+			JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng!");
+			txtPhone.selectAll();
+			txtPhone.requestFocus();
+			return false;
+		}
+		String regex = "^[0-9]{10}$";
+		if (!phone.matches(regex)) {
+			JOptionPane.showMessageDialog(this, "Số điện thoại phải chứa đúng 10 chữ số. Ví dụ: 0822345678");
+			txtPhone.selectAll();
+			txtPhone.requestFocus();
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	private List<Customer> getCustomerListFromTable() {
+		List<Customer> customers = new ArrayList<>();
 		int row = table.getRowCount();
 		for (int i = 0; i < row; i++) {
 			Integer id = Integer.parseInt(tableModel.getValueAt(i, 0).toString());
-			String ISBN = tableModel.getValueAt(i, 1).toString();
-			String name = tableModel.getValueAt(i, 2).toString();
-			String authorName = tableModel.getValueAt(i, 3).toString();
-			String language = tableModel.getValueAt(i, 4).toString();
-			String category = tableModel.getValueAt(i, 5).toString();
-			Integer quantity = Integer.parseInt(tableModel.getValueAt(i, 6).toString());
-			Float price = Float.parseFloat(tableModel.getValueAt(i, 7).toString());
+			String name = tableModel.getValueAt(i, 1).toString();
+			String email = tableModel.getValueAt(i, 2).toString();
+			String phone = tableModel.getValueAt(i, 3).toString();
+			String address = tableModel.getValueAt(i, 4).toString();
+			String gender = tableModel.getValueAt(i, 5).toString();
 
-			Book book = new Book(id, ISBN, name, authorName, language, category, quantity, price);
-			books.add(book);
+			Customer customer = new Customer(id, name, email, phone, address, gender);
+			customers.add(customer);
 		}
-		return books;
+		return customers;
 	}
 
-	private void filterBook() {
+	private void filterCustomer() {
 		int result = JOptionPane.showConfirmDialog(this, "Bạn đã làm mới trang trước khi chọn lọc chưa?", "Xác nhận",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if (result == JOptionPane.NO_OPTION) {
 			return;
 		} else {
-			if(!txtCategory.getText().equals("")) {
-				JOptionPane.showMessageDialog(this, "Không thể tìm sách theo ảnh");
-				txtCategory.selectAll();
-				txtCategory.requestFocus();
-				return;
-			}
 			xoaDuLieuTrongTable();
-			List<Book> ds = bookDao.getAll();
-			readBooksToTable(ds);
-			filterByISBN();
+			List<Customer> customers = customerDao.getAll();
+			readCustomersToTable(customers);
+			filterByEmail();
 			filterByName();
-			filterByLanguage();
-			filterByAuthorName();
-			filterByCategory();
-			filterByPrice();
-			List<Book> books = getBookListFromTable();
-			if(books.size()<=0) {
+			filterByAddress();
+			filterByGender();
+			filterByPhone();
+			List<Customer> customersFilter = getCustomerListFromTable();
+			if(customersFilter.size()<=0) {
 				lblError.setText("Không tìm thấy dữ liệu bạn tìm kiếm!!");
 			}else lblError.setText("Tìm thấy!");
 		}
-	}
-
-	private void filterByISBN() {
-		String ISBN = txtISBN.getText();
-		if (ISBN.trim().equals("")) {
-			return;
-		}
-		List<Book> books = getBookListFromTable();
-		List<Book> filterList = new ArrayList<>();
-		for (Book book : books) {
-			if (ISBN.equals(book.getISBN())) {
-				filterList.add(book);
-			}
-		}
-		xoaDuLieuTrongTable();
-		readBooksToTable(filterList);
-	}
-
-	private void filterByCategory() {
-		String categoryFilter = txtCategory.getText();
-		if (categoryFilter.trim().equals("")) {
-			return;
-		}
-		List<Book> books = getBookListFromTable();
-		List<Book> filterList = new ArrayList<>();
-		for (Book book : books) {
-			if (categoryFilter.equals(book.getCategory())) {
-				filterList.add(book);
-			}
-		}
-		xoaDuLieuTrongTable();
-		readBooksToTable(filterList);
-	}
-
-	private void filterByLanguage() {
-		String language = txtLanguage.getText();
-		if (language.trim().equals(""))
-			return;
-		List<Book> books = getBookListFromTable();
-		List<Book> dsLoc = new ArrayList<>();
-		for (Book book : books) {
-			if (language.equals(book.getLanguage())) {
-				dsLoc.add(book);
-			}
-		}
-		xoaDuLieuTrongTable();
-		readBooksToTable(dsLoc);
-	}
-
-	private void filterByPrice() {
-		Float price = Float.parseFloat(txtPrice.getText());
-		if (txtPrice.getText().trim().equals(""))
-			return;
-		List<Book> books = getBookListFromTable();
-		List<Book> dsLoc = new ArrayList<>();
-		for (Book book : books) {
-			if (book.getPrice() == price) {
-				dsLoc.add(book);
-			}
-		}
-		xoaDuLieuTrongTable();
-		readBooksToTable(dsLoc);
-	}
-
-	private void filterByAuthorName() {
-		String authorName = txtAuthorName.getText();
-		if (authorName.trim().equals(""))
-			return;
-		List<Book> books = getBookListFromTable();
-		List<Book> dsLoc = new ArrayList<>();
-		for (Book book : books) {
-			if (authorName.equals(book.getAuthorName())) {
-				dsLoc.add(book);
-			}
-		}
-		xoaDuLieuTrongTable();
-		readBooksToTable(dsLoc);
 	}
 
 	private void filterByName() {
 		String name = txtName.getText();
 		if (name.trim().equals(""))
 			return;
-		List<Book> books = getBookListFromTable();
-		List<Book> dsLoc = new ArrayList<>();
-		for (Book book : books) {
-			if (name.equals(book.getName())) {
-				dsLoc.add(book);
+		List<Customer> customers = getCustomerListFromTable();
+		List<Customer> dsLoc = new ArrayList<>();
+		for (Customer customer : customers) {
+			if (name.equals(customer.getFullName())) {
+				customers.add(customer);
 			}
 		}
 		xoaDuLieuTrongTable();
-		readBooksToTable(dsLoc);
+		readCustomersToTable(dsLoc);
 	}
 
+	private void filterByEmail() {
+		String email = txtEmail.getText();
+		if (email.trim().equals("")) {
+			return;
+		}
+		List<Customer> customers = getCustomerListFromTable();
+		List<Customer> filterList = new ArrayList<>();
+		for (Customer customer : customers) {
+			if (email.equals(customer.getEmail())) {
+				filterList.add(customer);
+			}
+		}
+		xoaDuLieuTrongTable();
+		readCustomersToTable(filterList);
+	}
+
+	private void filterByPhone() {
+		String phone = txtPhone.getText();
+		if (phone.trim().equals("")) {
+			return;
+		}
+		List<Customer> customers = getCustomerListFromTable();
+		List<Customer> filterList = new ArrayList<>();
+		for (Customer customer : customers) {
+			if (phone.equals(customer.getPhone())) {
+				filterList.add(customer);
+			}
+		}
+		xoaDuLieuTrongTable();
+		readCustomersToTable(filterList);
+	}
+
+	private void filterByAddress() {
+		String address = txtAddress.getText();
+		if (address.trim().equals(""))
+			return;
+		List<Customer> customers = getCustomerListFromTable();
+		List<Customer> dsLoc = new ArrayList<>();
+		for (Customer customer : customers) {
+			if (address.toLowerCase().equals(customer.getAddress().toLowerCase())) {
+				dsLoc.add(customer);
+			}
+		}
+		xoaDuLieuTrongTable();
+		readCustomersToTable(dsLoc);
+	}
+
+	private void filterByGender() {
+		String gender = txtGender.getText().toLowerCase();
+		if (txtGender.getText().trim().equals(""))
+			return;
+		List<Customer> customers = getCustomerListFromTable();
+		List<Customer> dsLoc = new ArrayList<>();
+		for (Customer customer : customers) {
+			if (customer.getGender().toLowerCase().equals(gender)) {
+				dsLoc.add(customer);
+			}
+		}
+		xoaDuLieuTrongTable();
+		readCustomersToTable(dsLoc);
+	}
 	private boolean kiemTraRong() {
 		if(txtName.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "Tên sách không được rỗng!");
+			JOptionPane.showMessageDialog(this, "Họ tên không được rỗng!");
 			txtName.selectAll();
 			txtName.requestFocus();
 			return false;
 		}
-		if(txtQuantity.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "Số lượng không được rỗng!");
-			txtQuantity.selectAll();
-			txtQuantity.requestFocus();
+		if(txtGender.getText().trim().equals("")) {
+			JOptionPane.showMessageDialog(this, "Giới tính không được rỗng!");
+			txtGender.selectAll();
+			txtGender.requestFocus();
 			return false;
 		}
-		if(txtAuthorName.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "Tên tác giả không được rỗng!");
-			txtAuthorName.selectAll();
-			txtAuthorName.requestFocus();
-			return false;
-		}
-
-		if(txtPrice.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "Giá sách không được rỗng!");
-			txtPrice.selectAll();
-			txtPrice.requestFocus();
-			return false;
-		}
-		if(txtISBN.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "ISBN không được rỗng!");
-			txtISBN.selectAll();
-			txtISBN.requestFocus();
+		if(txtPhone.getText().trim().equals("")) {
+			JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng!");
+			txtPhone.selectAll();
+			txtPhone.requestFocus();
 			return false;
 		}
 
-		if(txtLanguage.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "Ngôn ngữ không được rỗng!");
-			txtLanguage.selectAll();
-			txtLanguage.requestFocus();
+		if(txtEmail.getText().trim().equals("")) {
+			JOptionPane.showMessageDialog(this, "Email không được rỗng!");
+			txtEmail.selectAll();
+			txtEmail.requestFocus();
 			return false;
 		}
-		if(txtCategory.getText().trim().equals("")) {
-			JOptionPane.showMessageDialog(this, "Thể loại không được rỗng!");
-			txtCategory.selectAll();
-			txtCategory.requestFocus();
+		if(txtAddress.getText().trim().equals("")) {
+			JOptionPane.showMessageDialog(this, "Địa chỉ không được rỗng!");
+			txtAddress.selectAll();
+			txtAddress.requestFocus();
 			return false;
 		}
+
 		return true;
 	}
 

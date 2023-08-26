@@ -180,9 +180,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		txtISBN.setBounds(84, 5, 268, 29);
 		pNamSanXuat.add(txtISBN);
 
-		Image imgThem = new ImageIcon("data//them.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 		btnAdd = new JButton("Thêm");
-		btnAdd.setIcon(new ImageIcon(imgThem));
 		btnAdd.setBackground(new Color(75, 209, 254));
 		btnAdd.setForeground(new Color(128, 0, 0));
 		btnAdd.setBounds(20, 256, 98, 37);

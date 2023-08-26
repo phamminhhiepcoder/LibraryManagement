@@ -57,7 +57,7 @@ public class Application implements ActionListener, MouseListener, KeyListener {
     private void initialize() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setSize(1500, 700);
+        frame.setSize(1200, 700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -79,10 +79,10 @@ public class Application implements ActionListener, MouseListener, KeyListener {
 
         tabbedPane.addTab("Quản lý khách hàng", new GUI_Customer());
         tabbedPane.addTab("Quản lý sách", new GUI_Book());
-//        tabbedPane.addTab("Tạo hoá đơn", new HoaDon());
+        tabbedPane.addTab("Nhân viên", new GUI_User());
+        //        tabbedPane.addTab("Tạo hoá đơn", new HoaDon());
 //        tabbedPane.addTab("QL xe", new GUI_QLXe());
 //        tabbedPane.addTab("Thống kê loại xe", new GUI_ThongKeLoaiXe());
-//        tabbedPane.addTab("Nhân viên", new GUI_QLNhanVien());
 //        tabbedPane.addTab("Khách hàng", new GUI_QLKhachHang());
 //        tabbedPane.addTab("Nhà cung cấp", new GUI_QLNhaCungCap());
     }
