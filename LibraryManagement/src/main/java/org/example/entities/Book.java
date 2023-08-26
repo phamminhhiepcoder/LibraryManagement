@@ -23,17 +23,18 @@ public class Book {
 
     private String ISBN;
 
+    private String name;
+
     @Column(name = "author_name")
     private String authorName;
 
     private String language;
 
+    private String category;
+
     private Integer quantity;
 
     private Float price;
-
-    private String category;
-
 
     @CreationTimestamp
     @Column(name = "created_date", nullable = false, updatable = false)
@@ -46,4 +47,38 @@ public class Book {
     @ManyToMany(mappedBy = "books")
     private Set<Invoice> invoices;
 
+    public Book(Integer id, String ISBN, String name, String authorName, String language, String category, Integer quantity, Float price) {
+        this.id = id;
+        this.ISBN = ISBN;
+        this.name = name;
+        this.authorName = authorName;
+        this.language = language;
+        this.category = category;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public Book(String ISBN, String name, String authorName, String language, String category, Integer quantity, Float price, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.ISBN = ISBN;
+        this.name = name;
+        this.authorName = authorName;
+        this.language = language;
+        this.category = category;
+        this.quantity = quantity;
+        this.price = price;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+    public Book(Integer id, String ISBN, String name, String authorName, String language, String category, Integer quantity, Float price, LocalDateTime updatedDate) {
+        this.id = id;
+        this.ISBN = ISBN;
+        this.name = name;
+        this.authorName = authorName;
+        this.language = language;
+        this.category = category;
+        this.quantity = quantity;
+        this.price = price;
+        this.updatedDate = updatedDate;
+    }
 }

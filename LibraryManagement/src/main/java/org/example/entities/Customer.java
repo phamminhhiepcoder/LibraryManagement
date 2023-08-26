@@ -4,7 +4,6 @@ package org.example.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.entities.converter.GenderConverter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -23,12 +22,16 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "full_name")
+    private String fullName;
+
     private String email;
 
     private String phone;
 
-    @Convert(converter = GenderConverter.class)
-    private Boolean gender;
+    private String address;
+
+    private String gender;
 
 
     @CreationTimestamp

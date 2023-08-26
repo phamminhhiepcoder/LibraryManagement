@@ -1,14 +1,11 @@
 package org.example.gui;
 
 import java.awt.EventQueue;
-import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -16,12 +13,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
-import org.example.gui.LoginDialog;
 import org.example.utils.HibernateUtils;
 
 public class Application implements ActionListener, MouseListener, KeyListener {
@@ -63,7 +57,7 @@ public class Application implements ActionListener, MouseListener, KeyListener {
     private void initialize() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setSize(1200, 700);
+        frame.setSize(1500, 700);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -83,9 +77,9 @@ public class Application implements ActionListener, MouseListener, KeyListener {
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
         frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
-        tabbedPane.addTab("Quản lý khách hàng", new KhachHang());
-//        tabbedPane.addTab("Bảo hành", new GUI_QLBaoHanh());
-//        tabbedPane.addTab("Nhập xe", new GUI_QLNhapXe());
+        tabbedPane.addTab("Quản lý khách hàng", new GUI_Customer());
+        tabbedPane.addTab("Quản lý sách", new GUI_Book());
+//        tabbedPane.addTab("Tạo hoá đơn", new HoaDon());
 //        tabbedPane.addTab("QL xe", new GUI_QLXe());
 //        tabbedPane.addTab("Thống kê loại xe", new GUI_ThongKeLoaiXe());
 //        tabbedPane.addTab("Nhân viên", new GUI_QLNhanVien());

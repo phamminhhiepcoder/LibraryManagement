@@ -35,7 +35,6 @@ public abstract class BaseDaoImpl<E, ID extends Serializable> implements BaseDao
         List<E> data;
         try(Session session = sessionFactory.getCurrentSession()){
             session.beginTransaction();
-            //entityType.getSimpleName() : get entity name
             Query<E> query = session.createQuery("from " + entityType.getSimpleName(), entityType);
             data = query.getResultList();
             session.getTransaction().commit();
