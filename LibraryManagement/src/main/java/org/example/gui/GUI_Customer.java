@@ -25,7 +25,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 	private JTextField txtName;
 	private JTextField txtPhone;
 	private JTextField txtAddress;
-    private JTextField txtGender;
+	private JComboBox<String> cmbGender;
 	private JButton btnAdd;
 	private JButton btnDelete;
 	private JButton btnUpdate;
@@ -124,10 +124,10 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		JLabel lblGender = new JLabel("Giới tính:");
 		lblGender.setBounds(0, 12, 74, 14);
 		pGender.add(lblGender);
-		txtGender = new JTextField();
-		txtGender.setColumns(10);
-		txtGender.setBounds(84, 8, 268, 26);
-		pGender.add(txtGender);
+		String[] genders = {"Male", "Female"};
+		cmbGender = new JComboBox<>(genders);
+		cmbGender.setBounds(84, 8, 268, 26);
+		pGender.add(cmbGender);
 
 		btnAdd = new JButton("Thêm");
 		btnAdd.setBackground(new Color(75, 209, 254));
@@ -231,7 +231,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		txtId.setText(tableModel.getValueAt(row, 0).toString());
 		txtAddress.setText(tableModel.getValueAt(row, 4).toString());
 		txtName.setText(tableModel.getValueAt(row, 1).toString());
-		txtGender.setText(tableModel.getValueAt(row, 5).toString());
+		cmbGender.setSelectedItem(tableModel.getValueAt(row, 5).toString());
 		txtPhone.setText(tableModel.getValueAt(row, 3).toString());
 		txtEmail.setText(tableModel.getValueAt(row, 2).toString());
 	}
@@ -257,7 +257,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 
 	private void lamMoi() {
 		txtEmail.setText("");
-		txtGender.setText("");
+		cmbGender.setSelectedItem("");
 		txtPhone.setText("");
 		txtId.setText("");
 		txtAddress.setText("");
@@ -280,7 +280,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		String phone  = txtPhone.getText();
 		String name = txtName.getText();
 		String address = txtAddress.getText();
-		String gender = txtGender.getText();
+		String gender = cmbGender.getName();
 		LocalDateTime createdDate = LocalDateTime.now();
 		LocalDateTime updatedDate = LocalDateTime.now();
 
@@ -336,7 +336,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 				String phone = txtPhone.getText();
 				String address = txtAddress.getText();
 				String email = txtEmail.getText();
-				String gender = txtGender.getText();
+				String gender = cmbGender.getSelectedItem().toString();
 
 				LocalDateTime updatedDate = LocalDateTime.now();
 				Customer customer = new Customer(id, name, email, phone, address, gender, updatedDate);
@@ -368,42 +368,42 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		return true;
 	}
 
-	private boolean validateEmail(String email) {
-		if (email.equals("")) {
-			JOptionPane.showMessageDialog(this, "Email không được rỗng!");
-			txtEmail.selectAll();
-			txtEmail.requestFocus();
-			return false;
-		}
-		String regex = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
-		if (!email.matches(regex)) {
-			JOptionPane.showMessageDialog(this, "Email không hợp lệ. Ví dụ hợp lệ: xxx@gmail.com");
-			txtEmail.selectAll();
-			txtEmail.requestFocus();
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-
-	private boolean validatePhone(String phone) {
-		if (phone.equals("")) {
-			JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng!");
-			txtPhone.selectAll();
-			txtPhone.requestFocus();
-			return false;
-		}
-		String regex = "^[0-9]{10}$";
-		if (!phone.matches(regex)) {
-			JOptionPane.showMessageDialog(this, "Số điện thoại phải chứa đúng 10 chữ số. Ví dụ: 0822345678");
-			txtPhone.selectAll();
-			txtPhone.requestFocus();
-			return false;
-		} else {
-			return true;
-		}
-	}
+//	private boolean validateEmail(String email) {
+//		if (email.equals("")) {
+//			JOptionPane.showMessageDialog(this, "Email không được rỗng!");
+//			txtEmail.selectAll();
+//			txtEmail.requestFocus();
+//			return false;
+//		}
+//		String regex = "\\b[\\w.%-]+@[-.\\w]+\\.[A-Za-z]{2,4}\\b";
+//		if (!email.matches(regex)) {
+//			JOptionPane.showMessageDialog(this, "Email không hợp lệ. Ví dụ hợp lệ: xxx@gmail.com");
+//			txtEmail.selectAll();
+//			txtEmail.requestFocus();
+//			return false;
+//		} else {
+//			return true;
+//		}
+//	}
+//
+//
+//	private boolean validatePhone(String phone) {
+//		if (phone.equals("")) {
+//			JOptionPane.showMessageDialog(this, "Số điện thoại không được rỗng!");
+//			txtPhone.selectAll();
+//			txtPhone.requestFocus();
+//			return false;
+//		}
+//		String regex = "^[0-9]{10}$";
+//		if (!phone.matches(regex)) {
+//			JOptionPane.showMessageDialog(this, "Số điện thoại phải chứa đúng 10 chữ số. Ví dụ: 0822345678");
+//			txtPhone.selectAll();
+//			txtPhone.requestFocus();
+//			return false;
+//		} else {
+//			return true;
+//		}
+//	}
 
 
 	private List<Customer> getCustomerListFromTable() {
@@ -452,7 +452,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		List<Customer> dsLoc = new ArrayList<>();
 		for (Customer customer : customers) {
 			if (name.equals(customer.getFullName())) {
-				customers.add(customer);
+				dsLoc.add(customer);
 			}
 		}
 		xoaDuLieuTrongTable();
@@ -507,8 +507,8 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 	}
 
 	private void filterByGender() {
-		String gender = txtGender.getText().toLowerCase();
-		if (txtGender.getText().trim().equals(""))
+		String gender = cmbGender.getSelectedItem().toString().toLowerCase();
+		if (cmbGender.getName().trim().equals(""))
 			return;
 		List<Customer> customers = getCustomerListFromTable();
 		List<Customer> dsLoc = new ArrayList<>();
@@ -527,10 +527,9 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 			txtName.requestFocus();
 			return false;
 		}
-		if(txtGender.getText().trim().equals("")) {
+		if(cmbGender.getSelectedItem().toString().trim().equals("")) {
 			JOptionPane.showMessageDialog(this, "Giới tính không được rỗng!");
-			txtGender.selectAll();
-			txtGender.requestFocus();
+			cmbGender.requestFocus();
 			return false;
 		}
 		if(txtPhone.getText().trim().equals("")) {

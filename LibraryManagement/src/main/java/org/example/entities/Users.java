@@ -41,6 +41,46 @@ public class Users {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    public Users(String fullName, String username, String password, String email, String phone, String address, String gender, LocalDateTime createdDate, LocalDateTime updatedDate, Role role) {
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.role = role;
+    }
+
+    public Users(Integer id, String fullName, String username, String password, String email, String phone, String address, String gender, Role role) {
+        this.id = id;
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.role = role;
+    }
+
+    public Users(Integer id, String fullName, String username, String password, String email, String phone, String address, String gender, LocalDateTime updatedDate, Role role) {
+        this.id = id;
+        this.fullName = fullName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.gender = gender;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.role = role;
+    }
+
+
 }
 
 
