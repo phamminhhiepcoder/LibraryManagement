@@ -63,6 +63,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		txtId.setBounds(106, 5, 260, 29);
 		pMaKH.add(txtId);
 		txtId.setColumns(10);
+		txtId.setEditable(false);
 
 		JPanel pTenKH = new JPanel();
 		pTenKH.setBackground(new Color(255, 255, 255));
@@ -280,7 +281,7 @@ public class GUI_Customer extends JPanel implements ActionListener, MouseListene
 		String phone  = txtPhone.getText();
 		String name = txtName.getText();
 		String address = txtAddress.getText();
-		String gender = cmbGender.getName();
+		String gender = cmbGender.getSelectedItem().toString();
 		LocalDateTime createdDate = LocalDateTime.now();
 		LocalDateTime updatedDate = LocalDateTime.now();
 

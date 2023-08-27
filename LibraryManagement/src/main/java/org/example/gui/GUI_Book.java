@@ -74,7 +74,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		add(pThongTinSach);
 		pThongTinSach.setLayout(null);
 		pThongTinSach.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.blue), "Thông tin xe máy"));
+				BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.blue), "Thông tin sách"));
 
 		JPanel pMaSach = new JPanel();
 		pMaSach.setBackground(new Color(255, 255, 255));
@@ -88,6 +88,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		txtId.setBounds(106, 5, 260, 29);
 		pMaSach.add(txtId);
 		txtId.setColumns(10);
+		txtId.setEditable(false);
 
 		JPanel pTenSach = new JPanel();
 		pTenSach.setBackground(new Color(255, 255, 255));
@@ -154,31 +155,32 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		txtCategory.setBounds(84, 8, 268, 26);
 		pTheLoai.add(txtCategory);
 
-		JPanel pGia = new JPanel();
-		pGia.setBackground(new Color(255, 255, 255));
-		pGia.setLayout(null);
-		pGia.setBounds(413, 105, 352, 45);
-		pThongTinSach.add(pGia);
+		JPanel pPrice = new JPanel();
+		pPrice.setBackground(new Color(255, 255, 255));
+		pPrice.setLayout(null);
+		pPrice.setBounds(413, 105, 352, 45);
+		pThongTinSach.add(pPrice);
 		JLabel lblNewLabel_6 = new JLabel("Giá:");
 		lblNewLabel_6.setBounds(0, 12, 74, 14);
-		pGia.add(lblNewLabel_6);
+		pPrice.add(lblNewLabel_6);
 		txtPrice = new JTextField();
 		txtPrice.setColumns(10);
 		txtPrice.setBounds(84, 5, 268, 29);
-		pGia.add(txtPrice);
+		pPrice.add(txtPrice);
 
-		JPanel pNamSanXuat = new JPanel();
-		pNamSanXuat.setBackground(new Color(255, 255, 255));
-		pNamSanXuat.setLayout(null);
-		pNamSanXuat.setBounds(413, 149, 352, 45);
-		pThongTinSach.add(pNamSanXuat);
-		JLabel lblNewLabel_7 = new JLabel("Năm sản xuất:");
-		lblNewLabel_7.setBounds(0, 12, 84, 14);
-		pNamSanXuat.add(lblNewLabel_7);
-		txtISBN = new JTextField();
-		txtISBN.setColumns(10);
-		txtISBN.setBounds(84, 5, 268, 29);
-		pNamSanXuat.add(txtISBN);
+		JPanel pQuantity = new JPanel();
+		pQuantity.setLayout(null);
+		pQuantity.setBackground(Color.WHITE);
+		pQuantity.setBounds(20, 149, 383, 45);
+		pThongTinSach.add(pQuantity);
+		JLabel lblNewLabel_3_1 = new JLabel("Số lượng:");
+		lblNewLabel_3_1.setBounds(0, 12, 106, 14);
+		pQuantity.add(lblNewLabel_3_1);
+		txtQuantity = new JTextField();
+		txtQuantity.setColumns(10);
+		txtQuantity.setBounds(106, 5, 260, 29);
+		pQuantity.add(txtQuantity);
+
 
 		btnAdd = new JButton("Thêm");
 		btnAdd.setBackground(new Color(75, 209, 254));
@@ -218,7 +220,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		bTable.setBounds(0, 305, 1180, 294);
 		add(bTable);
 		bTable.add(Box.createRigidArea(new Dimension(0, 5)));
-		String head[] = { "Mã sách", "ISBN", "Tên sách", "Ngôn ngữ", "Thể loại", "Số lượng", "Giá sách"
+		String head[] = { "Mã sách", "ISBN", "Tên sách", "Ngôn ngữ", "Thể loại", "Tác giả", "Số lượng", "Giá sách"
 				};
 		tableModel = new DefaultTableModel(head, 0);
 		table = new JTable(tableModel);
@@ -233,35 +235,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		panel_2.setBounds(810, 21, 345, 246);
 		pThongTinSach.add(panel_2);
 
-		JPanel pNhaCC = new JPanel();
-		pNhaCC.setLayout(null);
-		pNhaCC.setBackground(Color.WHITE);
-		pNhaCC.setBounds(20, 149, 383, 45);
-		pThongTinSach.add(pNhaCC);
 
-		JLabel lblNewLabel_3_1 = new JLabel("Tên nhà cung cấp:");
-		lblNewLabel_3_1.setBounds(0, 12, 106, 14);
-		pNhaCC.add(lblNewLabel_3_1);
-
-		txtQuantity = new JTextField();
-		txtQuantity.setColumns(10);
-		txtQuantity.setBounds(106, 5, 260, 29);
-		pNhaCC.add(txtQuantity);
-
-		JPanel pCategory = new JPanel();
-		pCategory.setLayout(null);
-		pCategory.setBackground(Color.WHITE);
-		pCategory.setBounds(413, 194, 352, 45);
-		pThongTinSach.add(pCategory);
-
-		JLabel lblCategory = new JLabel("Thể loại:");
-		lblCategory.setBounds(0, 12, 90, 14);
-		pCategory.add(lblCategory);
-
-		txtCategory = new JTextField();
-		txtCategory.setColumns(10);
-		txtCategory.setBounds(85, 5, 267, 29);
-		pCategory.add(txtCategory);
 
 		lblError = new JLabel("");
 		lblError.setFont(new Font("Tahoma", Font.ITALIC, 14));
@@ -278,14 +252,6 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 
 		table.addMouseListener(this);
 
-	}
-
-	public void createIconImage(JLabel x, int W, int H, String path) {
-		ImageIcon image = new ImageIcon(
-				new ImageIcon(path).getImage().getScaledInstance(W, H, Image.SCALE_SMOOTH));
-		x.setIcon(image);
-		repaint();
-		revalidate();
 	}
 
 	@Override
@@ -325,13 +291,13 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		// TODO Auto-generated method stub
 		int row = table.getSelectedRow();
 		txtId.setText(tableModel.getValueAt(row, 0).toString());
-		txtLanguage.setText(tableModel.getValueAt(row, 1).toString());
+		txtISBN.setText(tableModel.getValueAt(row, 1).toString());
 		txtName.setText(tableModel.getValueAt(row, 2).toString());
-		txtPrice.setText(tableModel.getValueAt(row, 5).toString());
+		txtLanguage.setText(tableModel.getValueAt(row, 3).toString());
+		txtCategory.setText(tableModel.getValueAt(row, 4).toString());
+		txtAuthorName.setText(tableModel.getValueAt(row, 5).toString());
 		txtQuantity.setText(tableModel.getValueAt(row, 6).toString());
-		txtAuthorName.setText(tableModel.getValueAt(row, 7).toString());
-		txtISBN.setText(tableModel.getValueAt(row, 8).toString());
-		txtCategory.setText(tableModel.getValueAt(row, 9).toString());
+		txtPrice.setText(tableModel.getValueAt(row, 7).toString());
 	}
 
 	@Override
@@ -350,7 +316,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		DecimalFormat df = new DecimalFormat("0.##");
 		for (Book book : books) {
 			tableModel.addRow(new Object[] { book.getId(), book.getISBN(), book.getName(),
-					book.getAuthorName(), book.getLanguage(),  book.getCategory(),
+					 book.getLanguage(),  book.getCategory(), book.getAuthorName(),
 					book.getQuantity(), df.format(book.getPrice())});
 		}
 	}
@@ -391,7 +357,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		LocalDateTime updatedDate = LocalDateTime.now();
 
 		if (checkIfExistName(name) && checkIfExistISBN(ISBN) && validateISBN(ISBN)) {
-			Book book = new Book(ISBN, name, authorName, language, category, quantity, price, createdDate, updatedDate);
+			Book book = new Book(ISBN, name, language, category, authorName, quantity, price, createdDate, updatedDate);
 			bookDao.save(book);
 			List<Book> books = bookDao.getAll();
 			xoaDuLieuTrongTable();
@@ -485,7 +451,7 @@ public class GUI_Book extends JPanel implements ActionListener, MouseListener {
 		String regex = "(([0-9A-Z]){4,5}-([0-9A-Z]){6,12})";
 		if (!ISBN.matches(regex)) {
 			JOptionPane.showMessageDialog(this,
-					"Số khung có chiều dài từ 10-17 ký tự và có dạng XXXX-XXXXXX.. trong đó X là các kí tự số hoặc chữ hoa. Ví dụ: 082U-12H1268712");
+					"ISBN có chiều dài từ 10-17 ký tự và có dạng XXXX-XXXXXX.. trong đó X là các kí tự số hoặc chữ hoa. Ví dụ: 082U-12H1268712");
 			txtISBN.selectAll();
 			txtISBN.requestFocus();
 			return false;

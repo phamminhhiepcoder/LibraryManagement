@@ -88,6 +88,7 @@ public class GUI_User extends JPanel implements ActionListener, MouseListener {
 		txtId.setBounds(106, 5, 260, 29);
 		pId.add(txtId);
 		txtId.setColumns(10);
+		txtId.setEditable(false);
 
 		JPanel pTenNhanVien = new JPanel();
 		pTenNhanVien.setBackground(new Color(255, 255, 255));
@@ -361,7 +362,7 @@ public class GUI_User extends JPanel implements ActionListener, MouseListener {
 		txtAddress.setText("");
 		txtPassword.setText("");
 		txtId.setText("");
-		txtPassword.setText("");
+		txtUsername.setText("");
 		txtFullName.setText("");
 		cbxGender.setSelectedIndex(0);
 		cbxRole.setSelectedIndex(0);
@@ -378,7 +379,6 @@ public class GUI_User extends JPanel implements ActionListener, MouseListener {
 	}
 
 	private void addUser() {
-
 		String password = txtPassword.getText();
 		String fullName = txtFullName.getText();
 		String gender = cbxGender.getSelectedItem().toString();

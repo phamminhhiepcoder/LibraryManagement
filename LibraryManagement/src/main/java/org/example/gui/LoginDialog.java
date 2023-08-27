@@ -74,8 +74,8 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
         gbc_btnCancel.gridy = 3;
         getContentPane().add(btnCancel, gbc_btnCancel);
 
-        txtUsername.setText("users");
-        txtPassword.setText("123456");
+        txtUsername.setText("admin1");
+        txtPassword.setText("123");
 
         setSize(500, 200);
         setLocationRelativeTo(null);

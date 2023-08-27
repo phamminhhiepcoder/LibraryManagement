@@ -58,7 +58,7 @@ public class Book {
         this.price = price;
     }
 
-    public Book(String ISBN, String name, String authorName, String language, String category, Integer quantity, Float price, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public Book(String ISBN, String name, String language, String category, String authorName,  Integer quantity, Float price, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.ISBN = ISBN;
         this.name = name;
         this.authorName = authorName;
