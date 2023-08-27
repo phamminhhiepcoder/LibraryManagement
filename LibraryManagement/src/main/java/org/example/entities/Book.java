@@ -46,7 +46,6 @@ public class Book {
 
     @ManyToMany(mappedBy = "books")
     private Set<Invoice> invoices;
-
     public Book(Integer id, String ISBN, String name, String authorName, String language, String category, Integer quantity, Float price) {
         this.id = id;
         this.ISBN = ISBN;

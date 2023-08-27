@@ -80,11 +80,8 @@ public class Application implements ActionListener, MouseListener, KeyListener {
         tabbedPane.addTab("Quản lý khách hàng", new GUI_Customer());
         tabbedPane.addTab("Quản lý sách", new GUI_Book());
         tabbedPane.addTab("Nhân viên", new GUI_User());
-        //        tabbedPane.addTab("Tạo hoá đơn", new HoaDon());
-//        tabbedPane.addTab("QL xe", new GUI_QLXe());
+        tabbedPane.addTab("Tạo hoá đơn", new GUI_MakeInvoice());
 //        tabbedPane.addTab("Thống kê loại xe", new GUI_ThongKeLoaiXe());
-//        tabbedPane.addTab("Khách hàng", new GUI_QLKhachHang());
-//        tabbedPane.addTab("Nhà cung cấp", new GUI_QLNhaCungCap());
     }
 
     @Override
@@ -138,7 +135,6 @@ public class Application implements ActionListener, MouseListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
-
     }
 
 }
