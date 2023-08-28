@@ -21,4 +21,47 @@ public class InvoiceDto {
         this.bookNames = bookNames;
         this.amount = amount;
     }
+
+    public InvoiceDto() {}
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public String getBookNames() {
+		return bookNames;
+	}
+
+	public void setBookNames(String bookNames) {
+		this.bookNames = bookNames;
+	}
+
+	public Float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Float amount) {
+		this.amount = amount;
+	}
+    
+    
 }
