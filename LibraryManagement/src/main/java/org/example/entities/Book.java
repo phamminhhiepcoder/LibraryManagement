@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,8 +45,8 @@ public class Book {
     @Column(name = "updated_date", nullable = false)
     private LocalDateTime updatedDate;
 
-    @ManyToMany(mappedBy = "books")
-    private Set<Invoice> invoices;
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
+    private List<Invoice> invoices;
     public Book(Integer id, String ISBN, String name, String authorName, String language, String category, Integer quantity, Float price) {
         this.id = id;
         this.ISBN = ISBN;

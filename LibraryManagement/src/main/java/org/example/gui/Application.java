@@ -79,11 +79,10 @@ public class Application implements ActionListener, MouseListener, KeyListener {
 
         tabbedPane.addTab("Quản lý khách hàng", new GUI_Customer());
         tabbedPane.addTab("Quản lý sách", new GUI_Book());
-        tabbedPane.addTab("Nhân viên", new GUI_User());
+        tabbedPane.addTab("Quản lý nhân viên", new GUI_User());
         tabbedPane.addTab("Tạo hoá đơn", new GUI_MakeInvoice());
-//        tabbedPane.addTab("Thống kê loại xe", new GUI_ThongKeLoaiXe());
+        tabbedPane.addTab("Quản lý hoá đơn", new GUI_Invoice());
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub

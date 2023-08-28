@@ -38,6 +38,7 @@ public class Invoice {
 
     @ManyToMany
     @JoinTable(
+
             name = "invoice_books",
             joinColumns = @JoinColumn(name = "invoice_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id")
