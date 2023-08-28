@@ -1,0 +1,16 @@
+-Sơ đồ luồng dữ liệu mức ngữ cảnh, sơ đồ chức năng, sơ đồ thực thể
+-Chức năng quản lý cửa hàng sách
++ Đăng nhập: để vô màn hình của thu ngân hay quản lý. (done)
++ Quản lý sách: xoá, sửa sách, thêm. (done)
++ Lập hoá đơn bán sách: Ghi hoá đơn tính tiền cho khách hàng.(done)
++ Tra cứu sách: Tìm kiếm sách(done)
++ Tra cứu hoá đơn, khách hàng đang lưu trữ bằng cách nhập từ khoá.
++ Quản lý thông tin khách hàng.(CUSTOMER) (done)
++ Quản lý tài khoản nhân viên.(done)
+
+=> Mua + bán sách
+
+
+
+
+  
