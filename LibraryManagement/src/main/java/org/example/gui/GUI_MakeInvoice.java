@@ -455,6 +455,7 @@ public class GUI_MakeInvoice extends JPanel implements ActionListener, MouseList
                 for (int row = 0; row < tableModelCTHD.getRowCount(); row++) {
                     Integer bookId = Integer.parseInt(tableModelCTHD.getValueAt(row, 1).toString());
                     Book book = bookDao.getOne(bookId);
+                    book.setQuantity(book.getQuantity() - 1);
                     books.add(book);
                 }
                 invoice.setBooks(books);
